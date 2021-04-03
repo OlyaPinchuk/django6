@@ -12,4 +12,4 @@ class ProfileModel(models.Model):
     surname = models.CharField(max_length=20)
     age = models.IntegerField()
     user = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name='profile')
-    # avatar = models.ImageField(upload_to=)
+    avatar = models.ImageField(upload_to='avatars')
