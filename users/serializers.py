@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, ValidationError
 from django.contrib.auth import get_user_model
 
 from user_profile.serializers import ProfileSerializer
@@ -17,5 +17,8 @@ class UserSerializer(ModelSerializer):
         }
 
     def create(self, validated_data):
-        user = UserModel.objects.create_user(**validated_data)
+        try:
+            user = UserModel.objects.create_user(**validated_data)
+        except ValueError as err:
+            raise ValidationError(err)
         return user
